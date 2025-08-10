@@ -75,7 +75,7 @@ curl http://localhost:8080/api/car-listings?make=honda
     - Use **Authorization Code flow** to authenticate users via an external identity provider (e.g., Keycloak, Auth0, AWS Cognito).
     - Issue **JWT tokens** for access and refresh.
   
-- **Rate Limit AOI**
+- **Rate Limit API**
     - Use **Bucket4j** for rate limiting on endpoints.
     - Store rate limit counters in Redis for distributed enforcement across instances.
     - Return appropriate HTTP status (e.g., `429 Too Many Requests`) when limit is exceeded.
