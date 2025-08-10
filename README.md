@@ -67,3 +67,17 @@ To test the application, you can produce a message to the `car_listings` Kafka t
 ```bash
 curl http://localhost:8080/api/car-listings?make=honda
 ```
+
+## TODO
+
+- **Implement OAuth2 Security (Authorization Code Flow with JWT)**
+    - Integrate Spring Security OAuth2 to secure API endpoints.
+    - Use **Authorization Code flow** to authenticate users via an external identity provider (e.g., Keycloak, Auth0, AWS Cognito).
+    - Issue **JWT tokens** for access and refresh, including role and permission claims.
+    - Configure token validation and refresh handling.
+    -
+- **Rate Limit AOI**
+    - Use **Bucket4j** for rate limiting on endpoints.
+    - Store rate limit counters in Redis for distributed enforcement across instances.
+    - Return appropriate HTTP status (e.g., `429 Too Many Requests`) when limit is exceeded.
+    - Add configuration properties to easily adjust rate limits per endpoint.
