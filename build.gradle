@@ -19,6 +19,7 @@ repositories {
 
 ext {
     set('springCloudVersion', "2025.0.0")
+    set('testcontainersVersion', "1.21.3")
 }
 
 dependencies {
@@ -32,8 +33,16 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation 'org.springframework.cloud:spring-cloud-starter-stream-kafka'
     implementation 'org.springframework.retry:spring-retry'
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.0'
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.0"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
+    testImplementation 'org.springframework.cloud:spring-cloud-stream-test-binder'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.testcontainers:kafka'
+    testImplementation 'org.testcontainers:elasticsearch'
+    testImplementation 'org.awaitility:awaitility'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     compileOnly 'org.projectlombok:lombok'
     testCompileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -43,7 +52,12 @@ dependencies {
 dependencyManagement {
     imports {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
     }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
 }
 
 springBoot {

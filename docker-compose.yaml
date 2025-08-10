@@ -63,16 +63,28 @@ services:
       - techchallenge-network
     restart: always
 
+  redis:
+    image: redis:latest
+    container_name: techchallenge-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - techchallenge-network
+    restart: always
+
   app:
     build: .
     container_name: techchallenge-app
     depends_on:
       - kafka
       - elasticsearch
+      - redis
     ports:
       - "8080:8080"
     environment:
       - SPRING_ELASTICSEARCH_URIS=elasticsearch:9200
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PORT=6379
       - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:29092
       - ELASTICSEARCH_INDEX_INITIALIZER_ENABLED=true
     networks:

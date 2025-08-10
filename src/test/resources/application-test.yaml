@@ -1,0 +1,28 @@
+app:
+  cache:
+    car-listings:
+      ttl: 1s
+spring:
+  cloud:
+    discovery:
+      enabled: false
+    function:
+      definition: carListings
+    stream:
+      bindings:
+        carListings-in-0:
+          destination: car_listings
+          content-type: application/json
+          group: tech_challenge_group
+      kafka:
+        bindings:
+          carListings-in-0:
+            consumer:
+              autoCommitOnError: false
+              enableDlq: true
+              dlqName: car_listings_error
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
