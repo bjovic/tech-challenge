@@ -26,7 +26,7 @@ WORKDIR /app
 RUN addgroup --system spring && adduser --system spring --ingroup spring
 
 # Copy the JAR file from build stage
-COPY --from=builder /app/build/libs/techchallenge-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=builder /app/build/libs/tech-challenge-0.0.1-SNAPSHOT.jar app.jar
 
 # Change ownership of the app directory
 RUN chown -R spring:spring /app
