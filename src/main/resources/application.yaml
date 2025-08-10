@@ -1,4 +1,6 @@
 app:
+  swagger:
+    server-url: http://localhost:8080
   elasticsearch:
     index-initializer:
       enabled: ${ELASTICSEARCH_INDEX_INITIALIZER_ENABLED:true}
@@ -34,3 +36,10 @@ spring:
               dlqName: car_listings_error
     function:
       definition: carListings
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html

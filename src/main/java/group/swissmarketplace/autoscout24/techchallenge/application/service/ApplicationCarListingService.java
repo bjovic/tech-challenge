@@ -2,6 +2,9 @@ package group.swissmarketplace.autoscout24.techchallenge.application.service;
 
 import group.swissmarketplace.autoscout24.techchallenge.domain.in.CarListingService;
 import group.swissmarketplace.autoscout24.techchallenge.domain.model.CarListing;
+import group.swissmarketplace.autoscout24.techchallenge.domain.model.CarListingSearchCriteria;
+import group.swissmarketplace.autoscout24.techchallenge.domain.model.Page;
+import group.swissmarketplace.autoscout24.techchallenge.domain.model.PageInformation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,10 @@ public class ApplicationCarListingService implements CarListingService {
 
   public void create(CarListing listing) {
     domainCarListingService.create(listing);
+  }
+
+  public Page<CarListing> search(CarListingSearchCriteria criteria, PageInformation pageInformation) {
+    return domainCarListingService.search(criteria, pageInformation);
   }
 
   public void update(CarListing listing) {

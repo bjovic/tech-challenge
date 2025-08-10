@@ -1,6 +1,9 @@
 package group.swissmarketplace.autoscout24.techchallenge.domain.in;
 
 import group.swissmarketplace.autoscout24.techchallenge.domain.model.CarListing;
+import group.swissmarketplace.autoscout24.techchallenge.domain.model.CarListingSearchCriteria;
+import group.swissmarketplace.autoscout24.techchallenge.domain.model.Page;
+import group.swissmarketplace.autoscout24.techchallenge.domain.model.PageInformation;
 
 /**
  * Service interface for managing car listings.
@@ -15,6 +18,15 @@ public interface CarListingService {
    * @param listing the car listing to create
    */
   void create(CarListing listing);
+
+  /**
+   * Searches for car listings based on the provided criteria and pagination information.
+   *
+   * @param criteria the search criteria
+   * @param pageInformation the pagination information
+   * @return a page of car listings matching the search criteria
+   */
+  Page<CarListing> search(CarListingSearchCriteria criteria, PageInformation pageInformation);
 
   /**
    * Updates an existing car listing.

@@ -1,6 +1,6 @@
 # techchallenge
 
-This is a Spring Boot application for the tech-challenge.
+This is a Spring Boot application for the tech challenge.
 
 ## Running the Application with Docker
 
@@ -19,11 +19,25 @@ The easiest way to run the application and all its dependencies is by using the 
     ```
     This command will build the Docker image for the application and start all the services in detached mode.
 
-2.  **Stopping the Services:**
+2.  **Accessing the Application:**
+    Once everything is running, the application will be accessible at [http://localhost:8080/api/car-listings](http://localhost:8080/api/car-listings).
+
+3.  **Stopping the Services:**
     To stop all the running containers, use the following command:
     ```bash
     docker-compose down
     ```
+
+
+## API Documentation
+
+The API documentation is available through Swagger UI. Once the application is running, you can access the Swagger UI at the following URL:
+
+[http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+
+The OpenAPI specification is available at:
+
+[http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
 
 ## Testing the App
 
@@ -48,4 +62,8 @@ To test the application, you can produce a message to the `car_listings` Kafka t
 ```
 
 4.  Click the **Produce** button to send the message to the Kafka topic.
+5.  You can then use the `/api/car-listings` endpoint to search for the newly created car listing. For example, you can use the following `curl` command to search for the car:
 
+```bash
+curl http://localhost:8080/api/car-listings?make=honda
+```

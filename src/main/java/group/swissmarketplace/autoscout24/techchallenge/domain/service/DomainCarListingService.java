@@ -2,6 +2,9 @@ package group.swissmarketplace.autoscout24.techchallenge.domain.service;
 
 import group.swissmarketplace.autoscout24.techchallenge.domain.in.CarListingService;
 import group.swissmarketplace.autoscout24.techchallenge.domain.model.CarListing;
+import group.swissmarketplace.autoscout24.techchallenge.domain.model.CarListingSearchCriteria;
+import group.swissmarketplace.autoscout24.techchallenge.domain.model.Page;
+import group.swissmarketplace.autoscout24.techchallenge.domain.model.PageInformation;
 import group.swissmarketplace.autoscout24.techchallenge.domain.out.CarListingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +20,15 @@ public class DomainCarListingService implements CarListingService {
     log.debug("Creating listing: <car={}>", listing);
     carListingRepository.save(listing);
     log.debug("Created listing: <id={}>", listing.id());
+  }
+
+  @Override
+  public Page<CarListing> search(
+      CarListingSearchCriteria criteria,
+      PageInformation pageInformation
+  ) {
+    log.debug("Searching listings by <criteria={}>", criteria);
+    return carListingRepository.search(criteria, pageInformation);
   }
 
   @Override
