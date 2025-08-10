@@ -1,6 +1,9 @@
 app:
   swagger:
     server-url: http://localhost:8080
+  cache:
+    car-listings:
+      ttl: 1m
   elasticsearch:
     index-initializer:
       enabled: ${ELASTICSEARCH_INDEX_INITIALIZER_ENABLED:true}
@@ -15,6 +18,12 @@ management:
 spring:
   elasticsearch:
     uris: localhost:9200
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      ssl:
+        enabled: false
   cloud:
     config:
       enabled: false
@@ -24,6 +33,13 @@ spring:
           destination: car_listings
           content-type: application/json
           group: tech_challenge_group
+          consumer:
+            max-attempts: 5
+            back-off-initial-interval: 1000
+            back-off-max-interval: 30000
+            back-off-multiplier: 2.0
+            retryable-exceptions:
+              group.swissmarketplace.autoscout24.techchallenge.domain.model.exception.RetryableException: true
       kafka:
         binder:
           brokers:

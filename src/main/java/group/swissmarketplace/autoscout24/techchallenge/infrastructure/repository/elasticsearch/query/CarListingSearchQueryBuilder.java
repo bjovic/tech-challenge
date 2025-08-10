@@ -69,6 +69,30 @@ public class CarListingSearchQueryBuilder {
             .build();
     }
 
+    public static String buildCacheKey(
+        CarListingSearchCriteria criteria,
+        PageInformation pageInformation
+    ) {
+        StringBuilder key = new StringBuilder("cs:");
+
+        if (criteria.make() != null) {
+            key.append(criteria.make(), 0, Math.min(3, criteria.make().length()));
+        }
+        if (criteria.model() != null) {
+            key.append("-").append(criteria.model(), 0, Math.min(3, criteria.model().length()));
+        }
+
+        String detailsString = String.format("yf%s-yt%s-pf%s-pt%s-mf%s-mt%s-p%s-s%s-st%s",
+            criteria.yearFrom(), criteria.yearTo(), criteria.priceFrom(), criteria.priceTo(),
+            criteria.mileageFrom(), criteria.mileageTo(),
+            pageInformation.page(), pageInformation.size(), pageInformation.sortType());
+
+        int detailsHash = Math.abs(detailsString.hashCode());
+        key.append(":").append(detailsHash);
+
+        return key.toString();
+    }
+
     private static Pageable buildPageable(PageInformation pageInformation) {
         return PageRequest.of(
             pageInformation.page(),

@@ -4,7 +4,7 @@ This is a Spring Boot application for the tech challenge.
 
 ## Running the Application with Docker
 
-The easiest way to run the application and all its dependencies is by using the provided `docker-compose.yaml` file. This will start the application along with Kafka, Zookeeper, Elasticsearch.
+The easiest way to run the application and all its dependencies is by using the provided `docker-compose.yaml` file. This will start the application along with Kafka, Zookeeper, Elasticsearch, and Redis.
 
 ### Prerequisites
 
