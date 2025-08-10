@@ -1,0 +1,36 @@
+app:
+  elasticsearch:
+    index-initializer:
+      enabled: ${ELASTICSEARCH_INDEX_INITIALIZER_ENABLED:true}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  health:
+    elasticsearch:
+      enabled: false
+spring:
+  elasticsearch:
+    uris: localhost:9200
+  cloud:
+    config:
+      enabled: false
+    stream:
+      bindings:
+        carListings-in-0:
+          destination: car_listings
+          content-type: application/json
+          group: tech_challenge_group
+      kafka:
+        binder:
+          brokers:
+            - localhost:9092
+        bindings:
+          carListings-in-0:
+            consumer:
+              autoCommitOnError: false
+              enableDlq: true
+              dlqName: car_listings_error
+    function:
+      definition: carListings
